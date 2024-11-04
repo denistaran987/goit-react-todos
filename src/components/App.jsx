@@ -23,8 +23,6 @@ function App() {
 
   const filterTask = tasks.filter(task => task.text.toLowerCase().includes(filter.toLowerCase()));
 
-  console.log(filterTask);
-
   return (
     <div className={s.container}>
       <Form onTask={addTask} />
