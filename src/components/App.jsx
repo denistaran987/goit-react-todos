@@ -1,5 +1,34 @@
+import s from './App.module.css';
+import Filter from './Filter/Filter';
+import Form from './Form/Form';
+import TaskList from './TaskList/TaskList';
+import initialTasks from '../tasks.json';
+import { useState } from 'react';
+
 function App() {
-  return <div></div>;
+  const [tasks, setTasks] = useState(initialTasks);
+
+  const addTask = (newTask) => {
+    setTasks((prev) => {
+      return [...prev, newTask];
+    });
+  };
+
+  const removeTask = (remId) => {
+    setTasks((prev) => {
+      return prev.filter((task) => task.id !== remId);
+    });
+  };
+
+  const filterTask = () => {};
+
+  return (
+    <div className={s.container}>
+      <Form onTask={addTask} />
+      <Filter filterTask={filterTask} />
+      <TaskList tasks={tasks} removeTask={removeTask} />
+    </div>
+  );
 }
 
 export default App;
