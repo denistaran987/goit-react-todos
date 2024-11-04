@@ -7,26 +7,29 @@ import { useState } from 'react';
 
 function App() {
   const [tasks, setTasks] = useState(initialTasks);
+  const [filter, setFilter] = useState('');
 
-  const addTask = (newTask) => {
-    setTasks((prev) => {
+  const addTask = newTask => {
+    setTasks(prev => {
       return [...prev, newTask];
     });
   };
 
-  const removeTask = (remId) => {
-    setTasks((prev) => {
-      return prev.filter((task) => task.id !== remId);
+  const removeTask = remId => {
+    setTasks(prev => {
+      return prev.filter(task => task.id !== remId);
     });
   };
 
-  const filterTask = () => {};
+  const filterTask = tasks.filter(task => task.text.toLowerCase().includes(filter.toLowerCase()));
+
+  console.log(filterTask);
 
   return (
     <div className={s.container}>
       <Form onTask={addTask} />
-      <Filter filterTask={filterTask} />
-      <TaskList tasks={tasks} removeTask={removeTask} />
+      <Filter filter={filter} setFilter={setFilter} />
+      <TaskList tasks={filterTask} removeTask={removeTask} />
     </div>
   );
 }

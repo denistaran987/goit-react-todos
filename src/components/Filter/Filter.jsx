@@ -1,7 +1,7 @@
 import s from './Filter.module.css';
 import { useId } from 'react';
 
-const Filter = () => {
+const Filter = ({ filter, setFilter }) => {
   const randomId = useId();
 
   return (
@@ -9,7 +9,14 @@ const Filter = () => {
       <label htmlFor={randomId} className={s.label}>
         Search by name
       </label>
-      <input type="text" id={randomId} />
+      <input
+        type="text"
+        id={randomId}
+        value={filter}
+        onChange={e => {
+          setFilter(e.target.value);
+        }}
+      />
     </div>
   );
 };
